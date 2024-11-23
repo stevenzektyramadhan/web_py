@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cek usia</title>
+  </head>
+  <body>
+    <h2>Tebak usia dari tahun lahir</h2>
+    <form action="/usia" method="post">
+      <label>Tahun lahir anda</label>
+      <input type="number" name="usia" />
+      <button type="submit">Kirim</button>
+    </form>
+    {% if usia is not none %}
+    <p>usia anda sekarang adalah {{usia}} tahun</p>
+    {% endif %}
+  </body>
+</html>
