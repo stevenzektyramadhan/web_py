@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .alert-success {
+        background-color: green;
+        color: white;
+      }
+      .alert-danger {
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MESSAGE start -->
+    {% with messages = get_flashed_messages(with_categories=True) %} {% if messages %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }}" style="margin-bottom: 15px; padding: 10px">{{ message }}</div>
+
+    {% endfor %} {% endif %} {% endwith %}
+    <!-- MESSAGE end -->
+
+    <a href="/add">Tambah barang</a>
+    <!-- TABEL START -->
+    <table border="1">
+      <thead>
+        <tr>
+          <td>Kode Barang</td>
+          <td>Nama Barang</td>
+          <td>Harga Barang</td>
+          <td>Stok Barang</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        {%if items%} {% for item in items%}
+        <tr>
+          <td>{{item[1]}}</td>
+          <td>{{item[2]}}</td>
+          <td>{{item[3]}}</td>
+          <td>{{item[4]}}</td>
+          <td>
+            <a href="/update/{{ item[0] }}">Edit</a>
+            <form action="/delete/{{item[0]}}" method="post" style="display: inline">
+              <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin ingin menghapus item ini ?')">Delet</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor%} {% else %}
+        <tr>
+          <td colspan="4">No data available</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+    <!-- TABEL END -->
+  </body>
+</html>
